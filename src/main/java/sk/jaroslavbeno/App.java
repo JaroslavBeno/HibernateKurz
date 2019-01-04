@@ -1,5 +1,6 @@
 package sk.jaroslavbeno;
 
+import sk.jaroslavbeno.model.Meno;
 import sk.jaroslavbeno.model.Message;
 import sk.jaroslavbeno.model.Osoba;
 import sk.jaroslavbeno.model.enums.Pohlavie;
@@ -37,18 +38,22 @@ public class App
 //        entityManager.close();
 
 
-        entityManager.getTransaction().begin();
-        entityManager.persist( new Osoba(Pohlavie.MUZ) );
-        entityManager.persist( new Osoba(Pohlavie.ZENA) );
-        entityManager.persist( new Osoba(Pohlavie.MUZ) );
-        entityManager.getTransaction().commit();
+//        Osoba osoba1 = new Osoba();
+//        osoba1.setPohlavie(Pohlavie.MUZ);
+//        osoba1.setMeno(new Meno("Mgr.","Peter", "Juraj", "Dlhomenný", "Phd."));
+//
+//        entityManager.getTransaction().begin();
+//        entityManager.persist( osoba1 );
+//        entityManager.getTransaction().commit();
+
 
         entityManager.getTransaction().begin();
         List<Osoba> result = entityManager.createQuery( "from Osoba", Osoba.class ).getResultList();
         for ( Osoba osoba : result ) {
             System.out.println("Osoba id: "+osoba.getId() +
                     ", Pohlavie: "+osoba.getPohlavie()+
-                    ", Pohlavie kod: "+osoba.getPohlavie().getKod());
+                    ", Pohlavie kod: "+osoba.getPohlavie().getKod()+
+                    ", meno: "+osoba.getMeno());
         }
 
         entityManager.getTransaction().commit();

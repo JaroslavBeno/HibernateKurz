@@ -15,6 +15,9 @@ public class Osoba {
     @Convert(converter = PohlavieConverter.class)
     private Pohlavie pohlavie;
 
+    @Embedded
+    private Meno meno;
+
     public Osoba() {
     }
 
@@ -36,6 +39,14 @@ public class Osoba {
 
     public void setPohlavie(Pohlavie pohlavie) {
         this.pohlavie = pohlavie;
+    }
+
+    public Meno getMeno() {
+        return meno;
+    }
+
+    public void setMeno(Meno meno) {
+        this.meno = meno;
     }
 }
 
