@@ -1,0 +1,23 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.2"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+
+    <persistence-unit name="sk.jaroslavbeno.jpa" transaction-type="RESOURCE_LOCAL">
+        <class>sk.jaroslavbeno.model.Message</class>
+        <class>sk.jaroslavbeno.model.Osoba</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/lear2code" />
+
+            <property name="javax.persistence.jdbc.user" value="root" />
+
+            <property name="javax.persistence.jdbc.password" value="root" />
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
