@@ -6,7 +6,7 @@ import sk.jaroslavbeno.model.enums.Pohlavie;
 import javax.persistence.*;
 
 @Entity
-public class Osoba {
+public class Osoba extends Obcan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

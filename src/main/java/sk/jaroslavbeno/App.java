@@ -38,13 +38,14 @@ public class App
 //        entityManager.close();
 
 
-//        Osoba osoba1 = new Osoba();
-//        osoba1.setPohlavie(Pohlavie.MUZ);
-//        osoba1.setMeno(new Meno("Mgr.","Peter", "Juraj", "Dlhomenný", "Phd."));
-//
-//        entityManager.getTransaction().begin();
-//        entityManager.persist( osoba1 );
-//        entityManager.getTransaction().commit();
+        Osoba osoba1 = new Osoba();
+        osoba1.setPohlavie(Pohlavie.ZENA);
+        osoba1.setMeno(new Meno("Mgr.","Phd.", "Janka", null, "Dlhomenná"));
+        osoba1.setCisloOp("XX4546SS");
+
+        entityManager.getTransaction().begin();
+        entityManager.persist( osoba1 );
+        entityManager.getTransaction().commit();
 
 
         entityManager.getTransaction().begin();
@@ -53,7 +54,8 @@ public class App
             System.out.println("Osoba id: "+osoba.getId() +
                     ", Pohlavie: "+osoba.getPohlavie()+
                     ", Pohlavie kod: "+osoba.getPohlavie().getKod()+
-                    ", meno: "+osoba.getMeno());
+                    ", meno: "+osoba.getMeno()+
+                    ", op: "+osoba.getCisloOp());
         }
 
         entityManager.getTransaction().commit();
