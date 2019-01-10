@@ -23,6 +23,12 @@ public class Osoba extends Obcan {
     @OneToMany(mappedBy = "osoba", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Telefon> telefony = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "osobyVSkupine")
+    private List<SkupinaKontaktov> skupinyOsoby = new ArrayList<>();
+
+
+
+
     public void addTelefon(Telefon telefon){
         telefony.add(telefon);
         telefon.setOsoba(this);

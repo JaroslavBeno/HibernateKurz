@@ -31,10 +31,15 @@ public class App
 
     }
 
+    private static void loadOsoba(EntityManager entityManager) {
+        Osoba osoba = entityManager.find(Osoba.class, 35L);
+        System.out.println(osoba);
+    }
+
     private static void deleteSkupina(EntityManager entityManager) {
         entityManager.getTransaction().begin();
 
-        SkupinaKontaktov skupina = entityManager.find(SkupinaKontaktov.class, 1L);
+        SkupinaKontaktov skupina = entityManager.find(SkupinaKontaktov.class, 2L);
         entityManager.remove(skupina);
 
         entityManager.getTransaction().commit();
@@ -42,7 +47,7 @@ public class App
 
 
     private static void loadSkupina(EntityManager entityManager) {
-        SkupinaKontaktov skupina = entityManager.find(SkupinaKontaktov.class, 1L);
+        SkupinaKontaktov skupina = entityManager.find(SkupinaKontaktov.class, 2L);
         System.out.println(skupina);
     }
 

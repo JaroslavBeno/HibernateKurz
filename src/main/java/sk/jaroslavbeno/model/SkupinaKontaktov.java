@@ -15,7 +15,7 @@ public class SkupinaKontaktov {
     @Column(name = "nazov")
     private String nazovSkupiny;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name = "skupina_id",
                                     foreignKey = @ForeignKey(name="fk_skupina_id")),
