@@ -22,17 +22,31 @@ public class App
                 Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        deleteSkupina(entityManager);
-
-
+        loadOsoba(entityManager);
 
         entityManager.close();
 
 
     }
 
+    private static void addAdresaOsobe(EntityManager entityManager) {
+        entityManager.getTransaction().begin();
+
+        Osoba osoba = entityManager.find(Osoba.class, 40L);
+
+        Adresa adresa = new Adresa();
+        adresa.setUlica("Daja ulica");
+        adresa.setMesto("Dajake mesto");
+        adresa.setPsc("90010");
+        adresa.setOsoba(osoba);
+
+        entityManager.persist(adresa);
+        entityManager.getTransaction().commit();
+    }
+
+
     private static void loadOsoba(EntityManager entityManager) {
-        Osoba osoba = entityManager.find(Osoba.class, 35L);
+        Osoba osoba = entityManager.find(Osoba.class, 40L);
         System.out.println(osoba);
     }
 

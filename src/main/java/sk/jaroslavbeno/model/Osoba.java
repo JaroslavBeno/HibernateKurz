@@ -26,7 +26,8 @@ public class Osoba extends Obcan {
     @ManyToMany(mappedBy = "osobyVSkupine")
     private List<SkupinaKontaktov> skupinyOsoby = new ArrayList<>();
 
-
+    @OneToOne(mappedBy = "osoba", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Adresa adresa;
 
 
     public void addTelefon(Telefon telefon){
@@ -41,6 +42,22 @@ public class Osoba extends Obcan {
 
 
     public Osoba() {
+    }
+
+    public List<SkupinaKontaktov> getSkupinyOsoby() {
+        return skupinyOsoby;
+    }
+
+    public void setSkupinyOsoby(List<SkupinaKontaktov> skupinyOsoby) {
+        this.skupinyOsoby = skupinyOsoby;
+    }
+
+    public Adresa getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(Adresa adresa) {
+        this.adresa = adresa;
     }
 
     public Osoba(Pohlavie pohlavie) {
