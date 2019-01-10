@@ -1,9 +1,6 @@
 package sk.jaroslavbeno;
 
-import sk.jaroslavbeno.model.Meno;
-import sk.jaroslavbeno.model.Message;
-import sk.jaroslavbeno.model.Osoba;
-import sk.jaroslavbeno.model.Telefon;
+import sk.jaroslavbeno.model.*;
 import sk.jaroslavbeno.model.enums.Pohlavie;
 
 import javax.persistence.EntityManager;
@@ -25,7 +22,7 @@ public class App
                 Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        saveOsobuTelefony2(entityManager);
+        deleteSkupina(entityManager);
 
 
 
@@ -33,6 +30,46 @@ public class App
 
 
     }
+
+    private static void deleteSkupina(EntityManager entityManager) {
+        entityManager.getTransaction().begin();
+
+        SkupinaKontaktov skupina = entityManager.find(SkupinaKontaktov.class, 1L);
+        entityManager.remove(skupina);
+
+        entityManager.getTransaction().commit();
+    }
+
+
+    private static void loadSkupina(EntityManager entityManager) {
+        SkupinaKontaktov skupina = entityManager.find(SkupinaKontaktov.class, 1L);
+        System.out.println(skupina);
+    }
+
+
+    private static void saveSkupinuAOsoby(EntityManager entityManager) {
+        entityManager.getTransaction().begin();
+
+        Osoba osoba = entityManager.find(Osoba.class, 35L);
+        Osoba osoba2 = entityManager.find(Osoba.class, 40L);
+        Osoba osoba3 = entityManager.find(Osoba.class, 39L);
+
+        SkupinaKontaktov skupina = new SkupinaKontaktov();
+        skupina.setNazovSkupiny("Skupna 1");
+        skupina.getOsobyVSkupine().add(osoba);
+        skupina.getOsobyVSkupine().add(osoba2);
+
+        SkupinaKontaktov skupina2 = new SkupinaKontaktov();
+        skupina2.setNazovSkupiny("Skupna 2");
+        skupina2.getOsobyVSkupine().add(osoba);
+        skupina2.getOsobyVSkupine().add(osoba3);
+
+        entityManager.persist(skupina);
+        entityManager.persist(skupina2);
+
+        entityManager.getTransaction().commit();
+    }
+
 
     private static void saveOsobuTelefony2(EntityManager entityManager) {
         entityManager.getTransaction().begin();

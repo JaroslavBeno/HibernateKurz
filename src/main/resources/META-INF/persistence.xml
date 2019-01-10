@@ -6,6 +6,7 @@
         <class>sk.jaroslavbeno.model.Message</class>
         <class>sk.jaroslavbeno.model.Osoba</class>
         <class>sk.jaroslavbeno.model.Telefon</class>
+        <class>sk.jaroslavbeno.model.SkupinaKontaktov</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
