@@ -20,8 +20,19 @@ public class Osoba extends Obcan {
     @Embedded
     private Meno meno;
 
-    @OneToMany(mappedBy = "osoba")
+    @OneToMany(mappedBy = "osoba", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Telefon> telefony = new ArrayList<>();
+
+    public void addTelefon(Telefon telefon){
+        telefony.add(telefon);
+        telefon.setOsoba(this);
+    }
+
+    public void removeTelefon(Telefon telefon){
+        telefony.remove(telefon);
+        telefon.setOsoba(null);
+    }
+
 
     public Osoba() {
     }

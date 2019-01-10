@@ -25,7 +25,7 @@ public class App
                 Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        saveOsobuTelefony(entityManager);
+        saveOsobuTelefony2(entityManager);
 
 
 
@@ -44,14 +44,12 @@ public class App
 
         Telefon telefon = new Telefon();
         telefon.setCislo("0911545111");
-        telefon.setOsoba(osoba);
 
         Telefon telefon2 = new Telefon();
         telefon2.setCislo("0912545222");
-        telefon2.setOsoba(osoba);
 
-        osoba.getTelefony().add(telefon);
-        osoba.getTelefony().add(telefon2);
+        osoba.addTelefon(telefon);
+        osoba.addTelefon(telefon2);
 
         entityManager.persist(osoba);
         entityManager.getTransaction().commit();
