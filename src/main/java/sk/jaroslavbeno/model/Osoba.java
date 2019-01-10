@@ -4,6 +4,8 @@ import sk.jaroslavbeno.converters.PohlavieConverter;
 import sk.jaroslavbeno.model.enums.Pohlavie;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Osoba extends Obcan {
@@ -17,6 +19,9 @@ public class Osoba extends Obcan {
 
     @Embedded
     private Meno meno;
+
+    @OneToMany(mappedBy = "osoba")
+    private List<Telefon> telefony = new ArrayList<>();
 
     public Osoba() {
     }
@@ -48,5 +53,24 @@ public class Osoba extends Obcan {
     public void setMeno(Meno meno) {
         this.meno = meno;
     }
+
+    @Override
+    public String toString() {
+        return "Osoba{" +
+                "id=" + id +
+                ", pohlavie=" + pohlavie +
+                ", meno=" + meno +
+                ", telefony=" + telefony +
+                "} " + super.toString();
+    }
+
+    public List<Telefon> getTelefony() {
+        return telefony;
+    }
+
+    public void setTelefony(List<Telefon> telefony) {
+        this.telefony = telefony;
+    }
+
 }
 

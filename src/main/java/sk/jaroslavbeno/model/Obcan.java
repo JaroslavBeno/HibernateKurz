@@ -18,4 +18,12 @@ public class Obcan {
     }
 
     // ALTER TABLE Osoba ADD COLUMN cislo_op nvarchar(100);
+
+
+    @Override
+    public String toString() {
+        return "Obcan{" +
+                "cisloOp='" + cisloOp + '\'' +
+                '}';
+    }
 }

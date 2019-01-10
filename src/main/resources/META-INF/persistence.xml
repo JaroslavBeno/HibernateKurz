@@ -5,6 +5,7 @@
     <persistence-unit name="sk.jaroslavbeno.jpa" transaction-type="RESOURCE_LOCAL">
         <class>sk.jaroslavbeno.model.Message</class>
         <class>sk.jaroslavbeno.model.Osoba</class>
+        <class>sk.jaroslavbeno.model.Telefon</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
