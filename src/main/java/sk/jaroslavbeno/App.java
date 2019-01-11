@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Hello world!
@@ -22,17 +23,31 @@ public class App
                 Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        saveOsobuTelefony2(entityManager);
+        nativeQuery(entityManager);
 
         entityManager.close();
 
 
     }
 
+    private static void nativeQuery(EntityManager entityManager) {
+        entityManager.getTransaction().begin();
+        List<Osoba> osoby =
+                entityManager.createNativeQuery("select * from osoba",Osoba.class)
+                        .getResultList();
+
+        for (Osoba osoba : osoby){
+            System.out.println("id = "+osoba.getId()+", priezvisko = "+osoba.getMeno().getPriezvisko());
+        }
+
+        entityManager.getTransaction().commit();
+
+    }
+
     private static void addAdresaOsobe(EntityManager entityManager) {
         entityManager.getTransaction().begin();
 
-        Osoba osoba = entityManager.find(Osoba.class, 40L);
+        Osoba osoba = entityManager.find(Osoba.class, 48L);
 
         Adresa adresa = new Adresa();
         adresa.setUlica("Daja ulica");
@@ -40,14 +55,18 @@ public class App
         adresa.setPsc("90010");
         adresa.setOsoba(osoba);
 
+        entityManager.flush();
+
         entityManager.persist(adresa);
         entityManager.getTransaction().commit();
     }
 
 
     private static void loadOsoba(EntityManager entityManager) {
-        Osoba osoba = entityManager.find(Osoba.class, 40L);
-        System.out.println(osoba);
+        Osoba osoba = entityManager.find(Osoba.class, 48L);
+        Set<SkupinaKontaktov> skupiny = osoba.getSkupinyOsoby();
+        skupiny.size();
+        osoba.getTelefony().size();
     }
 
     private static void deleteSkupina(EntityManager entityManager) {
@@ -111,32 +130,32 @@ public class App
         entityManager.getTransaction().commit();
     }
 
-    private static void saveOsobuTelefony(EntityManager entityManager) {
-        entityManager.getTransaction().begin();
-
-        Osoba osoba = new Osoba();
-        osoba.setPohlavie(Pohlavie.ZENA);
-        osoba.setMeno(new Meno(null,null, "Janko", null, "Beno"));
-        osoba.setCisloOp("X411146D4");
-        ArrayList<Telefon> telefony = new ArrayList<>();
-
-        Telefon telefon = new Telefon();
-        telefon.setCislo("0911545111");
-        telefon.setOsoba(osoba);
-
-        Telefon telefon2 = new Telefon();
-        telefon2.setCislo("0912545222");
-        telefon2.setOsoba(osoba);
-
-        telefony.add(telefon);
-        telefony.add(telefon2);
-        osoba.setTelefony(telefony);
-
-        entityManager.persist(osoba);
-        entityManager.persist(telefon);
-        entityManager.persist(telefon2);
-        entityManager.getTransaction().commit();
-    }
+//    private static void saveOsobuTelefony(EntityManager entityManager) {
+//        entityManager.getTransaction().begin();
+//
+//        Osoba osoba = new Osoba();
+//        osoba.setPohlavie(Pohlavie.ZENA);
+//        osoba.setMeno(new Meno(null,null, "Janko", null, "Beno"));
+//        osoba.setCisloOp("X411146D4");
+//        ArrayList<Telefon> telefony = new ArrayList<>();
+//
+//        Telefon telefon = new Telefon();
+//        telefon.setCislo("0911545111");
+//        telefon.setOsoba(osoba);
+//
+//        Telefon telefon2 = new Telefon();
+//        telefon2.setCislo("0912545222");
+//        telefon2.setOsoba(osoba);
+//
+//        telefony.add(telefon);
+//        telefony.add(telefon2);
+//        osoba.setTelefony(telefony);
+//
+//        entityManager.persist(osoba);
+//        entityManager.persist(telefon);
+//        entityManager.persist(telefon2);
+//        entityManager.getTransaction().commit();
+//    }
 
 
     private static void nacitajOsobuPridajAdresu(EntityManager entityManager) {

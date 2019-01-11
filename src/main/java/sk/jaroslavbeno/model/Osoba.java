@@ -5,8 +5,13 @@ import sk.jaroslavbeno.model.enums.Pohlavie;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+/**
+ * www.vladmihalcea.com
+ */
 @Entity
 public class Osoba extends Obcan {
 
@@ -20,13 +25,13 @@ public class Osoba extends Obcan {
     @Embedded
     private Meno meno;
 
-    @OneToMany(mappedBy = "osoba", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Telefon> telefony = new ArrayList<>();
+    @OneToMany(mappedBy = "osoba", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<Telefon> telefony = new HashSet<>();
 
-    @ManyToMany(mappedBy = "osobyVSkupine")
-    private List<SkupinaKontaktov> skupinyOsoby = new ArrayList<>();
+    @ManyToMany(mappedBy = "osobyVSkupine", fetch = FetchType.LAZY)
+    private Set<SkupinaKontaktov> skupinyOsoby = new HashSet<>();
 
-    @OneToOne(mappedBy = "osoba", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "osoba", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Adresa adresa;
 
 
@@ -44,11 +49,11 @@ public class Osoba extends Obcan {
     public Osoba() {
     }
 
-    public List<SkupinaKontaktov> getSkupinyOsoby() {
+    public Set<SkupinaKontaktov> getSkupinyOsoby() {
         return skupinyOsoby;
     }
 
-    public void setSkupinyOsoby(List<SkupinaKontaktov> skupinyOsoby) {
+    public void setSkupinyOsoby(Set<SkupinaKontaktov> skupinyOsoby) {
         this.skupinyOsoby = skupinyOsoby;
     }
 
@@ -88,21 +93,21 @@ public class Osoba extends Obcan {
         this.meno = meno;
     }
 
-    @Override
-    public String toString() {
-        return "Osoba{" +
-                "id=" + id +
-                ", pohlavie=" + pohlavie +
-                ", meno=" + meno +
-                ", telefony=" + telefony +
-                "} " + super.toString();
-    }
+//    @Override
+//    public String toString() {
+//        return "Osoba{" +
+//                "id=" + id +
+//                ", pohlavie=" + pohlavie +
+//                ", meno=" + meno +
+//                ", telefony=" + telefony +
+//                "} " + super.toString();
+//    }
 
-    public List<Telefon> getTelefony() {
+    public Set<Telefon> getTelefony() {
         return telefony;
     }
 
-    public void setTelefony(List<Telefon> telefony) {
+    public void setTelefony(Set<Telefon> telefony) {
         this.telefony = telefony;
     }
 
