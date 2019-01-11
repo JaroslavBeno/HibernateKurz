@@ -22,7 +22,7 @@ public class App
                 Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        loadOsoba(entityManager);
+        saveOsobuTelefony2(entityManager);
 
         entityManager.close();
 

@@ -14,11 +14,16 @@
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/lear2code" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/new_schema" />
 
             <property name="javax.persistence.jdbc.user" value="root" />
 
             <property name="javax.persistence.jdbc.password" value="root" />
+
+            <property name = "hibernate.show_sql" value = "true" />
+            <property name = "hibernate.format_sql" value = "true" />
+            <!--<property name = "hibernate.hbm2ddl.auto" value = "update" />-->
+
         </properties>
 
     </persistence-unit>
