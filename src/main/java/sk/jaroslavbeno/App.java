@@ -1,5 +1,6 @@
 package sk.jaroslavbeno;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import sk.jaroslavbeno.model.*;
 import sk.jaroslavbeno.model.enums.Pohlavie;
 
@@ -15,7 +16,22 @@ import java.util.Set;
 
 /**
  * Hello world!
- *
+ *          <plugin>
+ *             <groupId>com.mysema.maven</groupId>
+ *             <artifactId>apt-maven-plugin</artifactId>
+ *             <version>1.1.3</version>
+ *             <executions>
+ *               <execution>
+ *                 <goals>
+ *                   <goal>process</goal>
+ *                 </goals>
+ *                 <configuration>
+ *                   <outputDirectory>target/generated-sources/java</outputDirectory>
+ *                   <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+ *                 </configuration>
+ *               </execution>
+ *             </executions>
+ *           </plugin>
  */
 public class App 
 {
@@ -26,10 +42,20 @@ public class App
                 Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        criteria(entityManager);
+        queryDSL(entityManager);
 
         entityManager.close();
 
+
+    }
+
+    private static void queryDSL(EntityManager entityManager) {
+        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
+
+        QOsoba osoba = QOsoba.osoba;
+        List<Osoba> osoby = jpaQueryFactory.selectFrom(osoba)
+                .where(osoba.meno.priezvisko.like("%atka%")).fetch();
+        System.out.println(osoby);
 
     }
 
@@ -38,7 +64,7 @@ public class App
         CriteriaQuery<Osoba> criteria = builder.createQuery( Osoba.class );
         Root<Osoba> from = criteria.from( Osoba.class );
         criteria.select( from );
-        criteria.where( builder.equal( from.get(Osoba_.id), 25L ) );
+        criteria.where( builder.equal( from.get("id"), 25L ) );
 
         List<Osoba> persons = entityManager.createQuery( criteria ).getResultList();
 

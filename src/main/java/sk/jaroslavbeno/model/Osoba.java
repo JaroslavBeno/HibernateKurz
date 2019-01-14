@@ -93,15 +93,15 @@ public class Osoba extends Obcan {
         this.meno = meno;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Osoba{" +
-//                "id=" + id +
-//                ", pohlavie=" + pohlavie +
-//                ", meno=" + meno +
-//                ", telefony=" + telefony +
-//                "} " + super.toString();
-//    }
+    @Override
+    public String toString() {
+        return "Osoba{" +
+                "id=" + id +
+                ", pohlavie=" + pohlavie +
+                ", meno=" + meno +
+                ", telefony=" + telefony +
+                "} " + super.toString();
+    }
 
     public Set<Telefon> getTelefony() {
         return telefony;
