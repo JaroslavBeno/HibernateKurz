@@ -6,6 +6,9 @@ import sk.jaroslavbeno.model.enums.Pohlavie;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -23,11 +26,23 @@ public class App
                 Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        nativeQuery(entityManager);
+        criteria(entityManager);
 
         entityManager.close();
 
 
+    }
+
+    private static void criteria(EntityManager entityManager) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Osoba> criteria = builder.createQuery( Osoba.class );
+        Root<Osoba> from = criteria.from( Osoba.class );
+        criteria.select( from );
+        criteria.where( builder.equal( from.get(Osoba_.id), 25L ) );
+
+        List<Osoba> persons = entityManager.createQuery( criteria ).getResultList();
+
+        //https://en.wikibooks.org/wiki/Java_Persistence/Criteria
     }
 
     private static void nativeQuery(EntityManager entityManager) {
