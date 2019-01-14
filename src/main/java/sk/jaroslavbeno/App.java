@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -42,9 +43,20 @@ public class App
                 Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        queryDSL(entityManager);
+        try{
+            entityManager.getTransaction().begin();
+            criteria(entityManager);
+            entityManager.getTransaction().commit();
 
-        entityManager.close();
+        }catch (Exception e){
+            try{
+                entityManager.getTransaction().rollback();
+            }catch (Exception ex){
+                //nepodarilo sa rollbacknúť
+            }
+        }finally {
+            entityManager.close();
+        }
 
 
     }
