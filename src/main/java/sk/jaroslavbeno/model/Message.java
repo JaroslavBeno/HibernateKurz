@@ -1,10 +1,15 @@
 package sk.jaroslavbeno.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class Message {
+
+    private static Logger logger = LoggerFactory.getLogger(Message.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +23,9 @@ public class Message {
     }
 
     public Message(String message) {
+        logger.debug("som v konštruktore Message debug");
+        logger.warn("som v konštruktore Message warn");
+        logger.error("som v konštruktore Message error");
         this.message = message;
     }
 

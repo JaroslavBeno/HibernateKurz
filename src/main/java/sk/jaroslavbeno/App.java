@@ -1,6 +1,8 @@
 package sk.jaroslavbeno;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sk.jaroslavbeno.model.*;
 import sk.jaroslavbeno.model.enums.Pohlavie;
 
@@ -36,27 +38,40 @@ import java.util.Set;
  */
 public class App 
 {
+    private static Logger logger = LoggerFactory.getLogger(App.class);
+
     public static void main( String[] args )
     {
+//        String hodnota = "hodnota";
+//        String hodnota2 = "hodnota2";
+//        String hodnota3 = "hodnota3";
+//        logger.debug("Hello word from logger");
+//        logger.debug("Debug text "+hodnota+".");
+//        logger.debug("Debug text {}.",hodnota);
+//        logger.debug("Debug text {} {}.",hodnota, hodnota2);
+//        Object[] parametre = {hodnota, hodnota2, hodnota3};
+//        logger.debug("Debug {} text {}, {}.",parametre);
 
-        EntityManagerFactory entityManagerFactory =
-                Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Message message = new Message("Sprava");
 
-        try{
-            entityManager.getTransaction().begin();
-            criteria(entityManager);
-            entityManager.getTransaction().commit();
-
-        }catch (Exception e){
-            try{
-                entityManager.getTransaction().rollback();
-            }catch (Exception ex){
-                //nepodarilo sa rollbacknúť
-            }
-        }finally {
-            entityManager.close();
-        }
+//        EntityManagerFactory entityManagerFactory =
+//                Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//
+//        try{
+//            entityManager.getTransaction().begin();
+//            criteria(entityManager);
+//            entityManager.getTransaction().commit();
+//
+//        }catch (Exception e){
+//            try{
+//                entityManager.getTransaction().rollback();
+//            }catch (Exception ex){
+//                //nepodarilo sa rollbacknúť
+//            }
+//        }finally {
+//            entityManager.close();
+//        }
 
 
     }
