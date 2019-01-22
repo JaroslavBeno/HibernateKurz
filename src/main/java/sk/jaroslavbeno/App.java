@@ -40,8 +40,7 @@ public class App
 {
     private static Logger logger = LoggerFactory.getLogger(App.class);
 
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) throws InterruptedException {
 //        String hodnota = "hodnota";
 //        String hodnota2 = "hodnota2";
 //        String hodnota3 = "hodnota3";
@@ -52,7 +51,10 @@ public class App
 //        Object[] parametre = {hodnota, hodnota2, hodnota3};
 //        logger.debug("Debug {} text {}, {}.",parametre);
 
-        Message message = new Message("Sprava");
+        while(true) {
+            Thread.sleep(1000);
+            Message message = new Message("Sprava");
+        }
 
 //        EntityManagerFactory entityManagerFactory =
 //                Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");

@@ -23,6 +23,7 @@ public class Message {
     }
 
     public Message(String message) {
+
         logger.debug("som v konštruktore Message debug");
         logger.warn("som v konštruktore Message warn");
         logger.error("som v konštruktore Message error");
