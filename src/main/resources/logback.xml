@@ -4,11 +4,33 @@
 
     <property resource="logbacknastavenia.properties" />
     <variable scope="context" name="contextPremenna" value="toto je premenna z kontextu" />
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!--<filter class="sk.jaroslavbeno.filters.VlastnyFIlter">-->
+            <!--<levelElement>INFO</levelElement>-->
+        <!--</filter>-->
+        <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+            <!--<level>INFO</level>-->
+        <!--</filter>-->
+
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+
+
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
-            <pattern>${${userid}.password:-${default}}    ${contextPremenna:-defaultna hodnota} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <!--<pattern>${${userid}.password:-${default}}    ${contextPremenna:-defaultna hodnota} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+            <!--<pattern>[%5.15logger] %n</pattern>-->
+            <!--<pattern>[%5.1logger] %n</pattern>-->
+            <!--<pattern>[%-20.-20logger] %n</pattern>-->
+            <!--<pattern>[%highlight(%d{HH:mm:ss.SSS} [%level])] %n</pattern>-->
+            <pattern>[%highlight(%d{HH:mm:ss.SSS}) %green([%level])] %msg%n</pattern>
+
+            <!--("%black", "%red", "%green","%yellow","%blue", "%magenta","%cyan", "%white", "%gray", "%boldRed","%boldGreen", "%boldYellow", "%boldBlue", "%boldMagenta""%boldCyan", "%boldWhite" and "%highlight").-->
         </encoder>
     </appender>
 
@@ -94,7 +116,7 @@
     <!--</logger>-->
     <!--<logger name="org.hibernate" level="TRACE" />-->
 
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE_TIME_ROLL"/>
     </root>

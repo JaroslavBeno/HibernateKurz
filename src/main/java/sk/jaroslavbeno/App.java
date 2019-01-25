@@ -51,10 +51,10 @@ public class App
 //        Object[] parametre = {hodnota, hodnota2, hodnota3};
 //        logger.debug("Debug {} text {}, {}.",parametre);
 
-        while(true) {
-            Thread.sleep(1000);
-            Message message = new Message("Sprava");
-        }
+//        while(true) {
+//            Thread.sleep(1000);
+//        }
+        Message message = new Message("Sprava");
 
 //        EntityManagerFactory entityManagerFactory =
 //                Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");
