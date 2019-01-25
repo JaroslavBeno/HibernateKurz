@@ -42,6 +42,42 @@
         </encoder>
     </appender>
 
+    <appender name="FILE_SIZETIME_ROLL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logFile.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>log%d{yyyy-MM-dd_HH-mm}.%i.log</fileNamePattern>
+            <!-- 10 dní histórie ale max 2GB dát -->
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>10</maxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
+
+
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_Window_ROLL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logFile.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>log%i.log</fileNamePattern>
+            <minIndex>2</minIndex>
+            <maxIndex>10</maxIndex>
+        </rollingPolicy>
+
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>5MB</maxFileSize>
+        </triggeringPolicy>
+
+        <encoder>
+            <pattern>%level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
 
 
     <logger name="sk.jaroslavbeno.model" level="DEBUG">
