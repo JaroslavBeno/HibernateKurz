@@ -1,4 +1,5 @@
 # Hibernate-JPA-ORM kurz
+# Logovanie Java aplikácií kurz
 Tento projekt slúži pre vás aby ste si mohli postupne stiahnuť zdrojové kódy projektu,
 tak ako ich postupne píšem. 
 Každý commit reflektuje jedno video - v popise commitu je názov videa.
