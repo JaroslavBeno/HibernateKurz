@@ -18,6 +18,17 @@ public class Adresa {
     public Adresa() {
     }
 
+    @Override
+    public String toString() {
+        return "Adresa{" +
+                "id=" + id +
+                ", ulica='" + ulica + '\'' +
+                ", mesto='" + mesto + '\'' +
+                ", psc='" + psc + '\'' +
+                ", osoba=" + osoba +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

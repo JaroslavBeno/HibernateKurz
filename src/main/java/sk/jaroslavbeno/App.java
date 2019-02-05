@@ -3,6 +3,7 @@ package sk.jaroslavbeno;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sk.jaroslavbeno.crud.impl.AdresaRepository;
 import sk.jaroslavbeno.model.*;
 import sk.jaroslavbeno.model.enums.Pohlavie;
 
@@ -41,39 +42,43 @@ public class App
     private static Logger logger = LoggerFactory.getLogger(App.class);
 
     public static void main( String[] args ) throws InterruptedException {
-//        String hodnota = "hodnota";
-//        String hodnota2 = "hodnota2";
-//        String hodnota3 = "hodnota3";
-//        logger.debug("Hello word from logger");
-//        logger.debug("Debug text "+hodnota+".");
-//        logger.debug("Debug text {}.",hodnota);
-//        logger.debug("Debug text {} {}.",hodnota, hodnota2);
-//        Object[] parametre = {hodnota, hodnota2, hodnota3};
-//        logger.debug("Debug {} text {}, {}.",parametre);
 
-//        while(true) {
-//            Thread.sleep(1000);
-//        }
-        Message message = new Message("Sprava");
+        EntityManagerFactory entityManagerFactory
+                = Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        AdresaRepository adresaRepository = new AdresaRepository(entityManager);
 
-//        EntityManagerFactory entityManagerFactory =
-//                Persistence.createEntityManagerFactory("sk.jaroslavbeno.jpa");
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        //--------------------------------------------------------------------------
+//        Adresa adresa = new Adresa();
+//        adresa.setUlica("Dlhá ulica 27");
+//        adresa.setPsc("97404");
+//        adresa.setMesto("Banská Bystrica");
 //
-//        try{
-//            entityManager.getTransaction().begin();
-//            criteria(entityManager);
-//            entityManager.getTransaction().commit();
+//        Adresa adresa2 = new Adresa();
+//        adresa.setUlica("Dlhá ulica 25");
+//        adresa.setPsc("97404");
+//        adresa.setMesto("Banská Bystrica");
 //
-//        }catch (Exception e){
-//            try{
-//                entityManager.getTransaction().rollback();
-//            }catch (Exception ex){
-//                //nepodarilo sa rollbacknúť
-//            }
-//        }finally {
-//            entityManager.close();
-//        }
+//        adresaRepository.create(adresa);
+//        adresaRepository.create(adresa2);
+//        System.out.println("pridane dve adresy\n");
+//        //--------------------------------------------------------------------------
+//        Adresa adresaZdb = adresaRepository.read(Adresa.class, 1L);
+//        System.out.println("Adresa z db:");
+//        System.out.println(adresaZdb+"\n");
+//
+//        //--------------------------------------------------------------------------
+//        Adresa adresaMoja = new Adresa();
+//        adresaMoja.setId(1L);
+//        adresaMoja.setUlica("Menim adresu 10");
+//        Adresa updateAdresa = adresaRepository.update(adresaMoja);
+//        System.out.println("Adresa update:");
+//        System.out.println(updateAdresa);
+//        System.out.println("update adresy\n");
+
+        //--------------------------------------------------------------------------
+        Adresa adresaNaZmazanie = adresaRepository.read(Adresa.class,3L);
+        adresaRepository.delete(adresaNaZmazanie);
 
 
     }
